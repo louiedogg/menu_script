@@ -298,11 +298,6 @@ function category() {
 
 	}
 
-
-
-
-
-
 // Query to display table
 
 		include(WP_CONTENT_DIR . '/plugins/restaurateur/lib/dbConnect.php');
