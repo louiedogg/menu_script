@@ -921,6 +921,15 @@ function invoice() {
 ///////////////////****POST****/////////////////////////////////
 
 		// Check for Post Requests otherwise display Record, Open, and Closed Invoices
+
+		echo '<form method="POST" action="" >	
+		<p>
+			<input type="submit" name="invoice_new" id="invoice_new" value="New Invoice" />	
+			<input type="submit" name="expense_new" id="expense_new" value="New Expense" />
+			<input type="submit" name="expense_open" id="expense_open" value="Open Expense" />
+			<input type="submit" name="expense_closed" id="expense_closed" value="Closed Expense" />
+		</p>
+		</form>';
 		
 		if ((isset($_POST['invoice_cancel'])) or
 			(isset($_POST['invoice_choice'])) or
@@ -929,6 +938,10 @@ function invoice() {
 			(isset($_POST['invoice_import'])) or
 			(isset($_POST['invoice_delete'])) or
 			(isset($_POST['invoice_saveImportedItems'])) or
+			(isset($_POST['invoice_new'])) or
+			(isset($_POST['expense_new'])) or
+			(isset($_POST['expense_open'])) or
+			(isset($_POST['expense_closed'])) or						
 			(isset($_POST['invoice_edit'])))	{
 					
 		
@@ -1010,8 +1023,30 @@ function invoice() {
 					</form></p>';
 
 			}
-
-
+		// Check for New invoice to import
+			if (isset($_POST['invoice_new']))
+			{
+				invoice_record();					
+				
+			}
+		// Check for New Expense
+			if (isset($_POST['expense_new']))
+			{
+				invoice_record();	
+				
+			}
+		// Check to view and close open invoices
+			if (isset($_POST['expense_open']))
+			{
+				invoice_displayOpen();				
+				
+			}
+		// Check to view closed expenses
+			if (isset($_POST['expense_closed']))
+			{
+				invoice_displayClosed();					
+				
+			}
 
 		// If there is not an edit request display a request form
 
@@ -1023,9 +1058,18 @@ function invoice() {
 				}
 		}  else {
 
-				invoice_record();
-				invoice_displayOpen();
-				invoice_displayClosed();
+				echo "<h3>New Invoice</h3>
+						<p>Record Expense by Importing Ivoice</p>";
+				
+				echo "<h3>New Expense</h3>
+						<p>Add Individual Expense</p>";
+				
+				echo "<h3>Open Expense</h3>
+						<p>Link and Close expense to the proper expense.</p>";
+				
+				echo "<h3>Closed Expense</h3>
+						<p>Import Ivoice</p>";
+						
 
 				}
 				
